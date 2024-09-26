@@ -9,9 +9,8 @@ import styles from "./ChatApp.module.css";
 
 const BOT_TOKEN = import.meta.env.VITE_BOT_TOKEN;
 const CHAT_ID = import.meta.env.VITE_CHAT_ID;
-const AVATAR_2 = import.meta.env.VITE_AVATAR_2;
+const AVATAR_1 = import.meta.env.VITE_AVATAR_1;
 const AVATAR_3 = import.meta.env.VITE_AVATAR_3;
-const AVATAR_4 = import.meta.env.VITE_AVATAR_4;
 interface ChatAppProps {
   name?: string;
   color?: string;
@@ -129,23 +128,21 @@ const ChatApp: React.FC<ChatAppProps> = ({ name, color }) => {
             <div
               key={msg.timestamp}
               className={`flex ${
-                msg.speaker === "Speaker 1" ? "justify-end" : "justify-start"
+                msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                  ? "justify-end"
+                  : "justify-start"
               } mb-16`}
             >
               <div
                 className={`flex ${
-                  msg.speaker === "Speaker 1" ? "justify-end" : "justify-start"
+                  msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                    ? "justify-end"
+                    : "justify-start"
                 }`}
               >
-                {msg.speaker !== "Speaker 1" && (
+                {msg.speaker !== "Speaker 2" && msg.speaker !== "Speaker 4" && (
                   <img
-                    src={
-                      msg.speaker === "Speaker 2"
-                        ? AVATAR_2
-                        : msg.speaker === "Speaker 3"
-                        ? AVATAR_3
-                        : AVATAR_4
-                    }
+                    src={msg.speaker === "Speaker 1" ? AVATAR_1 : AVATAR_3}
                     alt="Avatar"
                     className="w-24 h-24 rounded-full mr-2 object-cover"
                   />
@@ -153,21 +150,38 @@ const ChatApp: React.FC<ChatAppProps> = ({ name, color }) => {
                 <MessageBox
                   type="text"
                   text={msg?.text}
-                  position={msg.speaker === "Speaker 1" ? "right" : "left"}
+                  position={
+                    msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                      ? "right"
+                      : "left"
+                  }
                   styles={{
                     backgroundColor:
-                      msg.speaker === "Speaker 1" ? color || "#FAE100" : "",
+                      msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                        ? color || "#FAE100"
+                        : "",
                     padding: 10,
                     borderRadius: 20,
-                    borderTopLeftRadius: msg.speaker === "Speaker 1" ? 20 : 0,
-                    borderTopRightRadius: msg.speaker === "Speaker 1" ? 0 : 20,
+                    borderTopLeftRadius:
+                      msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                        ? 20
+                        : 0,
+                    borderTopRightRadius:
+                      msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                        ? 0
+                        : 20,
                     color:
-                      msg.speaker === "Speaker 1" && color === "#068AFE"
+                      (msg.speaker === "Speaker 2" ||
+                        msg.speaker === "Speaker 4") &&
+                      color === "#068AFE"
                         ? "white"
                         : "",
                   }}
                   notchStyle={{
-                    fill: msg.speaker === "Speaker 1" ? color || "#FAE100" : "",
+                    fill:
+                      msg.speaker === "Speaker 2" || msg.speaker === "Speaker 4"
+                        ? color || "#FAE100"
+                        : "",
                   }}
                 />
               </div>
