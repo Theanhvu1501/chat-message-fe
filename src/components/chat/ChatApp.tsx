@@ -53,7 +53,7 @@ const ChatApp: React.FC<ChatAppProps> = ({ name, color }) => {
         const currentMessage = chatData[currentIndex];
         if (currentIndex === 0) {
           // Delay for 2 seconds before displaying the first message
-
+          await new Promise((resolve) => setTimeout(resolve, 2000));
           const audio = new Audio(notiVoice);
           // Phát âm thanh
           audio
@@ -114,9 +114,14 @@ const ChatApp: React.FC<ChatAppProps> = ({ name, color }) => {
         <div className="relative">
           <img src={"/asset/header.png"} className={styles.animatedImage} />
           <span
-            className="absolute top-3 left-24 text-white text-5xl "
+            className={styles.animatedImage}
             style={{
               fontFamily: "Binggrae Regular",
+              position: "absolute",
+              top: 0,
+              color: "white",
+              fontSize: 48,
+              left: 96,
             }}
           >
             {name}

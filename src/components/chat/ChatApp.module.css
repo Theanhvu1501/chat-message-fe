@@ -1,16 +1,21 @@
-.animatedImage {
-  animation: slideDown 2s ease;
-}
-
 .animatedAvatar {
   animation: slideDown 1s ease;
+}
+.animatedImage {
+  animation: slideDown 1s ease;
+  animation-delay: 2s; /* Thêm delay trước khi bắt đầu */
+  opacity: 0; /* Đặt opacity ban đầu là 0 để không hiển thị */
+  animation-fill-mode: forwards; /* Để giữ trạng thái cuối cùng sau khi animation kết thúc */
 }
 
 @keyframes slideDown {
   0% {
+    transform: translateY(-100%); /* Bắt đầu từ phía trên */
     opacity: 0;
   }
   100% {
-    opacity: 1;
+    transform: translateY(0); /* Kết thúc tại vị trí ban đầu */
+    opacity: 1; /* Hiển thị khi kết thúc */
   }
 }
+
